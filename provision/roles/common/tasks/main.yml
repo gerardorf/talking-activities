@@ -1,0 +1,6 @@
+---
+- name: update apt-get cache if necessary
+  become: true
+  apt:
+    cache_valid_time=3600
+    update_cache=true

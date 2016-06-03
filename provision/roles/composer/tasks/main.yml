@@ -1,0 +1,20 @@
+---
+- name: download composer installer
+  get_url:
+    url=https://getcomposer.org/installer
+    mode=0440
+    dest=~
+
+- name: run installer
+  shell: php installer
+    chdir=~
+
+- name: make composer globally available
+  become: true
+  shell: mv composer.phar /usr/local/bin/composer
+    chdir=/home/vagrant
+
+- name: remove composer installer
+  file:
+    path='~/installer'
+    state=absent

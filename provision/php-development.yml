@@ -1,0 +1,6 @@
+---
+- hosts: talking-activities
+  roles:
+    - common
+    - php
+    - composer
