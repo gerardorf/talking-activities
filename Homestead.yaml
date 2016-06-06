@@ -1,5 +1,4 @@
 ---
-ip: "192.168.10.10"
 memory: 2048
 cpus: 1
 hostname: talking-activities
@@ -12,15 +11,18 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "/home/gerardorf/workspaces/noflopsquad/vaughan/talking-activities"
-      to: "/home/vagrant/talking-activities"
+    - map: "./code"
+      to: "/home/vagrant/code"
 
 sites:
-    - map: homestead.app
-      to: "/home/vagrant/talking-activities/public"
+    - map: talking-activities
+      to: "/home/vagrant/code/talking-activities/public"
 
 databases:
     - homestead
+
+networks:
+    - type: "public_network"
 
 # blackfire:
 #     - id: foo
