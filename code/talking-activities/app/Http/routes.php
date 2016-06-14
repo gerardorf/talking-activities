@@ -15,6 +15,4 @@ Route::get('/login', function () {
     return view('layout.login');
 });
 
-Route::post('system/authentication',function(){
-	return response()->json(['token' => '1234']);
-});
+Route::post('system/authentication', 'AuthenticationController@attempt');
