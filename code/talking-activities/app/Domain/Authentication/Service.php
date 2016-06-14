@@ -2,15 +2,17 @@
 namespace App\Domain\Authentication;
 
 use App\Domain\Authentication\Repository;
+use App\Domain\Authentication\User;
 
 class Service
 {
 
-	public function attempt($email, $password)
+	public function attempt(User $user)
 	{
-		$isStored  = Repository::exists($email,$password);
+		$isStored  = Repository::exists($user);
 		if( !$isStored ) return false;
 
-		return ['token' => '1234'];
+		return TokenCalculator::do($user);
 	}
+
 }

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Domain\Authentication\Service as AuthenticationService;
+use App\Domain\Authentication\User;
 
 class AuthenticationController extends Controller
 {
@@ -16,10 +17,10 @@ class AuthenticationController extends Controller
 
 	public function attempt(Request $request)
 	{
-        $email = $request->email;
-        $password = $request->password;
 
-        $token = $this->service->attempt($email, $password);
+        $user = new User($request->email, $request->password);
+
+        $token = $this->service->attempt($user);
 
 		return response()->json($token);
 	}
