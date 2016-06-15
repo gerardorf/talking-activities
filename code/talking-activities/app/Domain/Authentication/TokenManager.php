@@ -6,8 +6,7 @@ class TokenManager
 
     public static function create($user, $approval)
     {
-        $token =  self::createToken($user, $approval);
-        return self::composeMessage($token);
+        return self::createToken($user, $approval);
     }
 
     private static function createToken($user, $approval)
@@ -16,8 +15,4 @@ class TokenManager
         return TokenGenerator::do($user);
     }
 
-    private static function composeMessage($token)
-    {
-        return ['token' => $token];
-    }
 }

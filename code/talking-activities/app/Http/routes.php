@@ -14,5 +14,9 @@
 Route::get('/login', function () {
     return view('layout.login');
 });
+Route::get('/welcome',function(){
+    return view('layout.welcome');
+});
 
 Route::post('system/authentication', 'AuthenticationController@attempt');
+

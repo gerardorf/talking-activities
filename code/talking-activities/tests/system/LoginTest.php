@@ -23,7 +23,7 @@ class LoginTest extends TestCase
 	{
 		$aUser = ['email' => 'idontexist@pruebas.com','password' => 'whatever'];
 		$endpoint = 'system/authentication';
-		$invalidToken = ['token' => ''];
+		$invalidToken = ['token' => '', 'error'=> 'login.password.error'];
 
 		$this->json('POST',$endpoint,$aUser)
 			->assertResponseOk()

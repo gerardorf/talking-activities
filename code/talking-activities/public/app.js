@@ -18,8 +18,10 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
             .success(function(response){
                 var token = response.token;
                 if(token == ''){
-                    $scope.error = 'Invalid token';
+                    $scope.error = response.error;
+                    return;
                 }
+                document.location = '/welcome';
             });
     }.bind($scope);
 }]);
