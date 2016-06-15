@@ -15,3 +15,8 @@ storage/
 
 # Vagrant
 .vagrant/
+
+
+phpstrom-docker/
+.idea/
+
