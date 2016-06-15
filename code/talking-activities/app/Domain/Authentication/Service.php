@@ -9,10 +9,8 @@ class Service
 
 	public function attempt(User $user)
 	{
-		$isStored  = Repository::exists($user);
-		if( !$isStored ) return false;
+		$isStored = Repository::exists($user);
+		return TokenManager::create($user, $isStored);
 
-		return TokenCalculator::do($user);
 	}
-
 }

@@ -18,4 +18,16 @@ class LoginTest extends TestCase
 			->seeJsonEquals($validToken); 	
 	}
 
+	/** @test */
+	public function it_rejects_an_invalid_user()
+	{
+		$aUser = ['email' => 'idontexist@pruebas.com','password' => 'whatever'];
+		$endpoint = 'system/authentication';
+		$invalidToken = ['token' => ''];
+
+		$this->json('POST',$endpoint,$aUser)
+			->assertResponseOk()
+			->seeJsonEquals($invalidToken);
+	}
+
 }

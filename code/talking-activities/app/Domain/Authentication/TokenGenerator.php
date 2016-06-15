@@ -1,10 +1,10 @@
 <?php
 namespace App\Domain\Authentication;
 
-class TokenCalculator
+class TokenGenerator
 {
 	public static function do(User $user)
 	{
-		return ['token' => '1234'];
+		return '1234';
 	}
 }
