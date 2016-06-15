@@ -20,3 +20,4 @@ Route::get('/welcome',function(){
 
 Route::post('system/authentication', 'AuthenticationController@attempt');
 
+Route::post('system/labels', 'LabelController@resolve');
