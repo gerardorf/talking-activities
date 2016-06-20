@@ -5,29 +5,47 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+    const ENDPOINT= 'system/authentication';
+    
 
-	/** @test */
-	public function it_authenticates_a_user()
+    /** @test */
+	public function it_authenticates_a_valid_user()
 	{
-		$aUser = ['email' => 'student1@pruebas.com','password' => '1234/Alemany'];
-		$endpoint = 'system/authentication';
-		$validToken = ["token" => "1234"];
+        $validUser = ['email' => 'student1@pruebas.com', 'password' => '1234/Alemany'];
 
-		$this->json('POST',$endpoint,$aUser)
-			->assertResponseOk()
-			->seeJsonEquals($validToken); 	
+        $this->logWith($validUser)
+            ->assertValidToken();
 	}
 
 	/** @test */
 	public function it_rejects_an_invalid_user()
 	{
-		$aUser = ['email' => 'idontexist@pruebas.com','password' => 'whatever'];
-		$endpoint = 'system/authentication';
-		$invalidToken = ['token' => '', 'error'=> 'login.password.error'];
+		$invalidUser = ['email' => 'idontexist@pruebas.com', 'password' => 'whatever'];
 
-		$this->json('POST',$endpoint,$aUser)
-			->assertResponseOk()
-			->seeJsonEquals($invalidToken);
+		$this->logWith($invalidUser)
+            ->assertErrorMessage();
+        
 	}
+
+    private function logWith($user)
+    {
+        return $this->json('POST', self::ENDPOINT, $user);
+    }
+    
+    private function assertValidToken()
+    {
+        $validToken = ["token" => "1234"];
+        
+        $this->assertResponseOk()
+            ->seeJsonEquals($validToken);
+    }
+    
+    private function assertErrorMessage()
+    {
+        $errorMessage = ['token' => '', 'error'=> 'login.password.error'];
+        
+        return $this->assertResponseOk()
+            ->seeJsonEquals($errorMessage);
+    }
 
 }
