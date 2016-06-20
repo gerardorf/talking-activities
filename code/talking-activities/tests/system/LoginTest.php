@@ -27,6 +27,19 @@ class LoginTest extends TestCase
         
 	}
 
+    /** @test */
+    public function it_authenticates_a_bunch_of_valid_users()
+    {
+        $validUser[0] = ['email' => 'student2@pruebas.com', 'password' => 'Ce-Sar-In-Pi'];
+        $validUser[1] = ['email' => 'student3@pruebas.com', 'password' => 'soy.islandes_123*'];
+        $validUser[2] = ['email' => 'student4@pruebas.com', 'password' => '1980_Ç-8'];
+
+        foreach ($validUser as $user){
+            $this->logWith($user)
+                ->assertValidToken();
+        }
+    }
+
     private function logWith($user)
     {
         return $this->json('POST', self::ENDPOINT, $user);
