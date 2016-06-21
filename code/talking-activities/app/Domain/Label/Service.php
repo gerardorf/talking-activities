@@ -1,14 +1,20 @@
 <?php
 namespace App\Domain\Label;
 
-use App\Domain\Label\Repository as LabelRepository;
+use App\Domain\Label\FakeRepository as LabelRepository;
 
 class Service
 {
-    public static function resolve($key)
+    private $repository;
+
+    public function __construct()
     {
-        $value = LabelRepository::find($key);
-        $message = ['key' => $key, 'value' => $value];
-        return response()->json($message);
+        $this->repository = new LabelRepository();
+    }
+
+    public function resolve($key)
+    {
+        $label = $this->repository->find($key);
+        return $label;
     }
 }

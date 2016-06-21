@@ -1,15 +1,18 @@
 <?php
 namespace App\Domain\Label;
 
-class Repository
+use App\Domain\Label\Label;
+
+class FakeRepository
 {
     private static $labels = [
         'login.mail.label' => 'Correo electrónico',
         'login.password.label' => 'Contraseña'
     ];
 
-    public static function find($key)
+    public function find($key)
     {
-        return self::$labels[$key];
+        $value = self::$labels[$key];
+        return new Label($key, $value);
     }
 }

@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
+
+    private $service;
+
+    public function __construct()
+    {
+        $this->service = new LabelService();
+    }
     public function resolve(Request $request)
     {
         $key = $request->key;
-        return LabelService::resolve($key);
+        $label = $this->service->resolve($key);
+        return response()->json($label);
     }
 }
