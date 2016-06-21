@@ -5,10 +5,12 @@ use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
+    const LOGIN_PAGE = '/login';
+
     /** test */
     public function a_valid_user_can_access()
     {
-        $this->visit('/login');
+        $this->visit(self::LOGIN_PAGE);
         $this->see('Login')
             ->see('Correo electrónico')
             ->see('Contraseña')
@@ -22,7 +24,7 @@ class LoginTest extends TestCase
     /** test */
     public function it_handles_an_unauthenticated_user()
     {
-        $this->visit('/login')
+        $this->visit(self::LOGIN_PAGE)
             ->see('Login')
             ->see('Correo electrónico')
             ->see('Contraseña')

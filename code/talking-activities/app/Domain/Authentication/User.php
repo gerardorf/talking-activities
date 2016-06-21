@@ -1,25 +1,26 @@
 <?php
-
 namespace App\Domain\Authentication;
+
+use App\Domain\Authentication\Credentials;
 
 class User
 {
-	private $email;
-	private $password;
-	
-	public function __construct($email, $password)
-	{
-		$this->email = $email;
-		$this->password = $password;
-	}
+    private $username;
+    private $token;
 
-	public function email()
-	{
-		return $this->email;
-	}
+    public function __construct(Credentials $credentials)
+    {
+        $this->username = $credentials->email();
+        $this->token = TokenManager::create($credentials);
+    }
+    
+    public function isValid()
+    {
+        return true;
+    }
 
-	public function password()
-	{
-		return $this->password;
-	}
+    public function token()
+    {
+        return $this->token;
+    }
 }

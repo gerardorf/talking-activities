@@ -1,7 +1,9 @@
 <?php
 namespace App\Domain\Authentication;
 
+use App\Domain\Authentication\Credentials;
 use App\Domain\Authentication\User;
+use App\Domain\Authentication\NullUser;
 
 class Repository
 {
@@ -10,14 +12,16 @@ class Repository
     public function __construct()
     {
         array_push($this->stored, 
-            new User('student1@pruebas.com', '1234/Alemany'), 
-            new User('student2@pruebas.com', 'Ce-Sar-In-Pi'),
-            new User('student3@pruebas.com', 'soy.islandes_123*'),
-            new User('student4@pruebas.com', '1980_Ç-8'));
+            new Credentials('student1@pruebas.com', '1234/Alemany'), 
+            new Credentials('student2@pruebas.com', 'Ce-Sar-In-Pi'),
+            new Credentials('student3@pruebas.com', 'soy.islandes_123*'),
+            new Credentials('student4@pruebas.com', '1980_Ç-8'));
     }
 
-    public function exists(User $user)
+    public function exists(Credentials $credentials)
     {
-        return in_array($user, $this->stored);
+        $found = in_array($credentials, $this->stored);
+        if (!$found) return new NullUser();
+        return new User($credentials);
 	}
 }

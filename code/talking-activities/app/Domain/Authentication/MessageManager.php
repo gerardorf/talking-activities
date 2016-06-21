@@ -1,13 +1,13 @@
 <?php
-
 namespace App\Domain\Authentication;
 
 class MessageManager
 {
-    public static function compose($token)
+    public static function compose(User $user)
     {
-        $message = ['token' => $token];
-        if (!$token) {
+        $message = ['token' => $user->token()];
+        if (!$user->isValid())
+        {
             $message = self::addErrors($message);
         }
         return $message;

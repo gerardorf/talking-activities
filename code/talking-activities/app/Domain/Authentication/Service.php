@@ -2,7 +2,7 @@
 namespace App\Domain\Authentication;
 
 use App\Domain\Authentication\Repository;
-use App\Domain\Authentication\User;
+use App\Domain\Authentication\Credentials;
 
 class Service
 {
@@ -13,10 +13,10 @@ class Service
         $this->repository = new Repository();
     }
     
-	public function attempt(User $user)
+	public function attempt(Credentials $credentials)
 	{
-		$isStored = $this->repository->exists($user);
-		$token = TokenManager::create($user, $isStored);
-		return MessageManager::compose($token);
+		$user = $this->repository->exists($credentials);
+		$message = MessageManager::compose($user);
+        return $message;
 	}
 }
