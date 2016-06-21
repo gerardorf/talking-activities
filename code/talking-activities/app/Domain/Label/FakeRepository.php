@@ -2,8 +2,9 @@
 namespace App\Domain\Label;
 
 use App\Domain\Label\Label;
+use App\Domain\Label\Repository;
 
-class FakeRepository
+class FakeRepository implements Repository
 {
     private static $labels = [
         'login.mail.label' => 'Correo electrónico',

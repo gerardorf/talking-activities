@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: developer
- * Date: 6/21/16
- * Time: 4:58 PM
- */
-
 namespace App\Domain\Label;
-
 
 use JsonSerializable;
 
