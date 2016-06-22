@@ -11,9 +11,9 @@ class LabelController extends Controller
 
     private $service;
 
-    public function __construct()
+    public function __construct(LabelService $labelService)
     {
-        $this->service = new LabelService();
+        $this->service = $labelService;
     }
     public function resolve(Request $request)
     {

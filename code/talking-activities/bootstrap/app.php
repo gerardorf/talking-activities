@@ -41,6 +41,10 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->bind(
+    App\Domain\Label\Repository::class,
+    App\Domain\Label\Infrastructure\LabelLocalizationRepository::class
+);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

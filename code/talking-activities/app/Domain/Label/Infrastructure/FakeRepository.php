@@ -1,5 +1,5 @@
 <?php
-namespace App\Domain\Label;
+namespace App\Domain\Label\Infrastructure;
 
 use App\Domain\Label\Label;
 use App\Domain\Label\Repository;
