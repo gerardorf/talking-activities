@@ -18,7 +18,7 @@ class Repository
             new Credentials('student4@pruebas.com', '1980_Ç-8'));
     }
 
-    public function exists(Credentials $credentials)
+    public function find(Credentials $credentials)
     {
         $found = in_array($credentials, $this->stored);
         if (!$found) return new NullUser();

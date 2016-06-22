@@ -11,7 +11,6 @@ class User
     public function __construct(Credentials $credentials)
     {
         $this->username = $credentials->email();
-        $this->token = TokenManager::create($credentials);
     }
     
     public function isValid()
@@ -22,5 +21,10 @@ class User
     public function token()
     {
         return $this->token;
+    }
+
+    public function setToken($token)
+    {
+        $this->token = $token;
     }
 }

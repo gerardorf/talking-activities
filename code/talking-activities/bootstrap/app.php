@@ -45,6 +45,11 @@ $app->bind(
     App\Domain\Label\Repository::class,
     App\Domain\Label\Infrastructure\LabelLocalizationRepository::class
 );
+
+$app->bind(
+    App\Domain\Authentication\TokenGenerator::class,
+    App\Domain\Authentication\Infrastructure\FakeTokenGenerator::class
+);
 /*
 |--------------------------------------------------------------------------
 | Return The Application

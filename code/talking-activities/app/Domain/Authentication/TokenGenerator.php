@@ -1,10 +1,7 @@
 <?php
 namespace App\Domain\Authentication;
 
-class TokenGenerator
+interface TokenGenerator
 {
-	public static function do(Credentials $user)
-	{
-		return '1234';
-	}
+    public function do(User $user);
 }
