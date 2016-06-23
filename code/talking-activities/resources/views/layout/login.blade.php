@@ -6,16 +6,16 @@
 			@{{ error }}
 		</div>
 		<form ng-submit="authenticate()">
-			<legend>Login</legend>
+			<legend>@{{ labels['login.title.label']  }}</legend>
 			<div class="form-group">
-				<label for="">Correo Electrónico</label>
+				<label for="">@{{ labels['login.mail.label']  }}</label>
 				<input type="text" name="login.mail" ng-model="login.email" class="form-control" placeholder="Input field">
 
-				<label for="">Contraseña</label>
+				<label for="">@{{ labels['login.password.label']  }}</label>
 				<input type="text" name="login.password" ng-model="login.password" class="form-control" id="login.password" placeholder="Input field">
 			</div>
 
-			<button type="submit" name="login.sumbit" class="btn btn-primary" id="login.submit">Entrar</button>
+			<button type="submit" name="login.sumbit" class="btn btn-primary" id="login.submit">@{{ labels['login.submit.label']  }}</button>
 		</form>
 		@{{ login }}
 	</div>
