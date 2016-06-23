@@ -12,7 +12,7 @@ class MessageManager
 
     private static function appendToken(User $user)
     {
-        $message = ['token' => $user->token()];
+        $message['token'] = $user->token();
         return $message;
     }
     

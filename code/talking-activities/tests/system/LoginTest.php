@@ -14,7 +14,7 @@ class LoginTest extends TestCase
         $validUser = ['email' => 'student1@pruebas.com', 'password' => '1234/Alemany'];
 
         $this->logWith($validUser)
-            ->assertValidToken();
+            ->assertJWTToken();
 	}
 
 	/** @test */
@@ -36,7 +36,7 @@ class LoginTest extends TestCase
 
         foreach ($validUser as $user){
             $this->logWith($user)
-                ->assertValidToken();
+                ->assertJWTToken();
         }
     }
 
@@ -45,12 +45,13 @@ class LoginTest extends TestCase
         return $this->json('POST', self::ENDPOINT, $user);
     }
     
-    private function assertValidToken()
+    private function assertJWTToken()
     {
-        $validToken = ["token" => "1234"];
+        $validToken = ["token"];
         
         $this->assertResponseOk()
-            ->seeJsonEquals($validToken);
+            ->seeJsonStructure($validToken)
+            ->dontSeeJson(['error'=> 'login.password.error']);
     }
     
     private function assertErrorMessage()

@@ -48,7 +48,7 @@ $app->bind(
 
 $app->bind(
     App\Domain\Authentication\TokenGenerator::class,
-    App\Domain\Authentication\Infrastructure\FakeTokenGenerator::class
+    App\Domain\Authentication\Infrastructure\JWTTokenGenerator::class
 );
 /*
 |--------------------------------------------------------------------------

@@ -27,4 +27,9 @@ class User
     {
         $this->token = $token;
     }
+
+    public function username()
+    {
+        return $this->username;
+    }
 }
