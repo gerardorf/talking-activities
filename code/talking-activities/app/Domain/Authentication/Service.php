@@ -3,9 +3,8 @@ namespace App\Domain\Authentication;
 
 use App\Domain\Authentication\Repository;
 use App\Domain\Authentication\Credentials;
-use App\Domain\Authentication\MessageManager;
+use App\Domain\Authentication\Exceptions\InvalidUserException;
 use App\Domain\Authentication\TokenGenerator;
-use App\Domain\Authentication\User;
 
 
 class Service
@@ -22,13 +21,9 @@ class Service
 	public function attempt(Credentials $credentials)
 	{
 		$user = $this->repository->find($credentials);
-		$user->setToken($this->generateToken($user));
-		$message = MessageManager::compose($user);
-        return $message;
-	}
-	
-	private function generateToken(User $user)
-	{
+		if( !$user->isValid())
+			throw new InvalidUserException;
+
 		return $this->tokenGenerator->do($user);
 	}
 }

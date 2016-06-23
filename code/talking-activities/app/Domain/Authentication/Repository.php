@@ -21,7 +21,7 @@ class Repository
     public function find(Credentials $credentials)
     {
         $found = in_array($credentials, $this->stored);
-        if (!$found) return new NullUser();
+        if (!$found) return new NullUser;
         return new User($credentials);
 	}
 }

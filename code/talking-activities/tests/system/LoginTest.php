@@ -56,7 +56,7 @@ class LoginTest extends TestCase
     
     private function assertErrorMessage()
     {
-        $errorMessage = ['token' => '', 'error'=> 'login.password.error'];
+        $errorMessage = ['error'=> 'login.password.error'];
         
         return $this->assertResponseOk()
             ->seeJsonEquals($errorMessage);

@@ -3,11 +3,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Domain\Authentication\Service as AuthenticationService;
+use App\Domain\Authentication\MessageManager;
 use App\Domain\Authentication\Credentials;
+use App\Domain\Authentication\Exceptions\InvalidUserException;
 
 class AuthenticationController extends Controller
 {
-
     private $authenticationService;
 
 	public function __construct(AuthenticationService $service)
@@ -17,8 +18,14 @@ class AuthenticationController extends Controller
 
 	public function attempt(Request $request)
 	{
-        $credentials = new Credentials($request->email, $request->password);
-        $token = $this->authenticationService->attempt($credentials);
-		return response()->json($token);
+		try{
+			$credentials = new Credentials($request->email, $request->password);
+			$token = $this->authenticationService->attempt($credentials);
+			$message = MessageManager::tokenMessage($token);
+		}catch (InvalidUserException $exception){
+			$message = MessageManager::errorMessage();
+		}
+		return response()->json($message);
+
 	}
 }

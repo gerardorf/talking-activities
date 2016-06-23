@@ -3,28 +3,13 @@ namespace App\Domain\Authentication;
 
 class MessageManager
 {
-    public static function compose(User $user)
+    public static function tokenMessage($token)
     {
-        $message = self::appendToken($user);
-        $message = self::addErrorsIfNeeded($user, $message);
-        return $message;
-    }
-
-    private static function appendToken(User $user)
-    {
-        $message['token'] = $user->token();
+        $message['token'] = $token;
         return $message;
     }
     
-    private static function addErrorsIfNeeded(User $user, $message)
-    {
-        if (!$user->isValid()) {
-            $message = self::addErrors($message);
-        }
-        return $message;
-    }
-    
-    private static function addErrors($message)
+    public static function errorMessage()
     {
         $message['error'] = 'login.password.error';
         return $message;
