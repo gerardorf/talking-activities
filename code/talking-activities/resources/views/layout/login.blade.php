@@ -3,7 +3,7 @@
 <div ng-app="talking-activities">
 	<div ng-controller="LoginController">
 		<div ng-show="error">
-			@{{ error }}
+			@{{ labels['login.password.error'] }}
 		</div>
 		<form ng-submit="authenticate()">
 			<legend>@{{ labels['login.title.label']  }}</legend>

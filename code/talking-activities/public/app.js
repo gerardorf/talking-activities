@@ -17,7 +17,7 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
 
     $scope.labels = {};
 
-    $scope.error = '';
+    $scope.error = false;
 
     $scope.obtainLabel = function(key){
         $http({
@@ -37,14 +37,14 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
             url:'/system/authentication',
             data:$scope.login
         })
-            .success(function(response){
-                var token = response.token;
-                if(token == ''){
-                    $scope.error = response.error;
-                    return;
-                }
-                document.location = '/welcome';
-            });
+        .success(function(response){
+            if(response.error){
+                $scope.obtainLabel(response.error);
+                $scope.error = true;
+                return;
+            }
+            document.location = '/welcome';
+        });
     }.bind($scope);
 
     $scope.init();

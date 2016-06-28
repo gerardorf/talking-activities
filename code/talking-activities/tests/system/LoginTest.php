@@ -50,16 +50,14 @@ class LoginTest extends TestCase
         $validToken = ["token"];
         
         $this->assertResponseOk()
-            ->seeJsonStructure($validToken)
-            ->dontSeeJson(['error'=> 'login.password.error']);
+            ->seeJsonStructure($validToken);
     }
     
     private function assertErrorMessage()
     {
         $errorMessage = ['error'=> 'login.password.error'];
-        
+
         return $this->assertResponseOk()
             ->seeJsonEquals($errorMessage);
     }
-
 }
