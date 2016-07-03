@@ -10,17 +10,23 @@ class LabelTest extends TestCase
     /** @test */
     public function it_resolves_login_keys()
     {
-        $mailKey = ['key' => 'login.mail.label'];
-        $mailExpectedLabel = ['key'=>'login.mail.label', 'value'=>'Correo electrónico'];
+        $mailKey = ['keys' => ['login.mail.label']];
+        $mailExpectedLabel = ['key' => 'login.mail.label', 'value' => 'Correo electrónico'];
         
         $this->request($mailKey)
             ->assertResolvedProperly($mailExpectedLabel);
 
-        $passwordKey = ['key' => 'login.password.label'];
+        $passwordKey = ['keys' => ['login.password.label']];
         $passwordExpectedLabel = ['key' => 'login.password.label', 'value' => 'Contraseña'];
         
         $this->request($passwordKey)
             ->assertResolvedProperly($passwordExpectedLabel);
+        
+        $severalKeys = ['keys' => ['login.mail.label', 'login.password.label']];
+        $severalExpectedLabels = ['key' => 'login.mail.label', 'value' => 'Correo electrónico'];
+        
+        $this->request($severalKeys)
+            ->assertResolvedProperly($severalExpectedLabels);
     }
 
     private function request($aLabel)
@@ -31,7 +37,8 @@ class LabelTest extends TestCase
     private function assertResolvedProperly($expectedLabel)
     {
         $this->assertResponseOk()
-            ->seeJsonEquals($expectedLabel);
+            ->seeJsonContains($expectedLabel);
         
+        var_dump($this->response);
     }
 }

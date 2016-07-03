@@ -3,11 +3,11 @@ var app = angular.module('talking-activities',['ngCookies']);
 app.controller('LoginController',['$scope','$http', '$cookies',function($scope,$http,$cookies){
 
     $scope.init = function () {
-        $scope.loadLabel('login.mail.label');
-        $scope.loadLabel('login.password.label');
-        $scope.loadLabel('login.submit.label');
-        $scope.loadLabel('login.title.label');
-        $scope.loadLabel('login.email.error');
+        $scope.loadLabels(['login.mail.label',
+            'login.password.label',
+            'login.submit.label',
+            'login.title.label',
+            ]);
     }.bind($scope);
 
     $scope.login = {
@@ -21,17 +21,24 @@ app.controller('LoginController',['$scope','$http', '$cookies',function($scope,$
     
     $scope.welcomeMessage = false;
 
-    $scope.loadLabel = function(key){
+    $scope.loadLabels= function(keys){
         $http({
             method:'post',
             url:'/system/labels',
-            data: {key: key}
+            data: {keys: keys}
         })
         .success(function(response){
-            $scope.labels[key] = response.value;
+            for(var i=0; i<response.length; i++)
+            {
+                $scope.labels[response[i].key] = response[i].value;
+            }
         }.bind($scope));
     };
 
+    $scope.loadLabel = function (key) {
+        $scope.loadLabels([key])
+    };
+    
     function isANewVisitor() {
         if ($cookies.get('show-welcome-message')==true){
             console.log('show welcome message');
@@ -54,6 +61,7 @@ app.controller('LoginController',['$scope','$http', '$cookies',function($scope,$
             data:$scope.login
         })
         .success(function(response){
+            console.log(response);
             if(response.error){
                 $scope.loadLabel(response.error);
                 $scope.error = true;

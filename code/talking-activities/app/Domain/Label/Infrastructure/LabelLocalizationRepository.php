@@ -8,11 +8,16 @@ class LabelLocalizationRepository implements Repository
 {
     const LOCALE_SPANISH = 'es';
 
-    public function find($key)
+    public function find($keys)
     {
-        $labelId = 'labels.' . $key;
-        $value = $this->findLabel($labelId);
-        return new Label($key, $value);
+        $results = [];
+        foreach ($keys as $key)
+        {
+            $labelId = 'labels.' . $key;
+            $value = $this->findLabel($labelId);
+            array_push($results, new Label($key, $value));
+        }
+        return $results;
     }
 
     private function findLabel($labelId)

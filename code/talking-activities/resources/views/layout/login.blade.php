@@ -15,11 +15,10 @@
 
 			<button type="submit" class="btn btn-lg btn-primary btn-block">@{{ labels['login.submit.label']  }} <i class="fa fa-sign-in"></i></button>
 		</form>
-		@{{ login }}
 	</div>
 </div>
 
-<script src="//code.angularjs.org/1.4.7/angular.min.js"></script>
+<script src="//code.angularjs.org/1.4.7/angular.min.js" ></script>
 <script src="//code.angularjs.org/1.4.7/angular-cookies.min.js"></script>
 <script src="/app.js"></script>
 @endsection

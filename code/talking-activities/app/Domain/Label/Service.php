@@ -12,9 +12,9 @@ class Service
         $this->repository = $repository;
     }
 
-    public function resolve($key)
+    public function resolve($keys)
     {
-        $label = $this->repository->find($key);
+        $label = $this->repository->find($keys);
         return $label;
     }
 }

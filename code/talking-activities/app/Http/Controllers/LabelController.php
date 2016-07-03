@@ -17,8 +17,8 @@ class LabelController extends Controller
     }
     public function resolve(Request $request)
     {
-        $key = $request->key;
-        $label = $this->service->resolve($key);
-        return response()->json($label);
+        $keys = $request->keys;
+        $labels = $this->service->resolve($keys);
+        return response()->json($labels);
     }
 }
