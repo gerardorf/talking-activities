@@ -1,14 +1,14 @@
-var app = angular.module('talking-activities',[]);
+var app = angular.module('talking-activities',['ngCookies']);
 
-app.controller('LoginController',['$scope','$http',function($scope,$http){
+app.controller('LoginController',['$scope','$http', '$cookies',function($scope,$http,$cookies){
 
     $scope.init = function () {
-        $scope.obtainLabel('login.mail.label');
-        $scope.obtainLabel('login.password.label');
-        $scope.obtainLabel('login.submit.label');
-        $scope.obtainLabel('login.title.label');
+        $scope.loadLabel('login.mail.label');
+        $scope.loadLabel('login.password.label');
+        $scope.loadLabel('login.submit.label');
+        $scope.loadLabel('login.title.label');
+        $scope.loadLabel('login.email.error');
     }.bind($scope);
-
 
     $scope.login = {
         email: '',
@@ -18,8 +18,10 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
     $scope.labels = {};
 
     $scope.error = false;
+    
+    $scope.welcomeMessage = false;
 
-    $scope.obtainLabel = function(key){
+    $scope.loadLabel = function(key){
         $http({
             method:'post',
             url:'/system/labels',
@@ -30,6 +32,20 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
         }.bind($scope));
     };
 
+    function isANewVisitor() {
+        if ($cookies.get('show-welcome-message')==true){
+            console.log('show welcome message');
+            return true;
+        } 
+        console.log('dont show console message');
+        return false;
+    }
+
+    var showWelcomeMessage = function () {
+        $cookies.put('show-welcome-message','false');
+        $scope.welcomeMessage = true;
+    };
+    
     $scope.authenticate = function(){
         $scope.error = '';
         $http({
@@ -39,9 +55,13 @@ app.controller('LoginController',['$scope','$http',function($scope,$http){
         })
         .success(function(response){
             if(response.error){
-                $scope.obtainLabel(response.error);
+                $scope.loadLabel(response.error);
                 $scope.error = true;
                 return;
+            }
+            console.log($cookies.get('show-welcome-message'));
+            if (isANewVisitor()){
+                showWelcomeMessage();
             }
             document.location = '/welcome';
         });

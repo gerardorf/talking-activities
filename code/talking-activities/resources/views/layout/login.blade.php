@@ -1,26 +1,25 @@
 @extends('layout.master')
 @section('content')
-<div ng-app="talking-activities">
-	<div ng-controller="LoginController">
-		<div ng-show="error">
+<div ng-app="talking-activities" class="container">
+
+	<div ng-controller="LoginController" class="col-md-offset-4 col-md-5">
+		<div ng-show="error" class="alert alert-danger">
 			@{{ labels['login.password.error'] }}
 		</div>
-		<form ng-submit="authenticate()">
-			<legend>@{{ labels['login.title.label']  }}</legend>
-			<div class="form-group">
-				<label for="">@{{ labels['login.mail.label']  }}</label>
-				<input type="text" name="login.mail" ng-model="login.email" class="form-control" placeholder="Input field">
+		<form ng-submit="authenticate()" class="form-signin">
+			<h2 class="form-signin-heading">@{{ labels['login.title.label']  }}</h2>
+			<label for="email">@{{ labels['login.mail.label']  }}</label>
+			<input type="text" id="email" ng-model="login.email" class="form-control" placeholder="@{{ labels['login.mail.label'] }}" required autofocus>
+			<label for="password">@{{ labels['login.password.label']  }}</label>
+			<input type="text" id="password" ng-model="login.password" class="form-control" placeholder="@{{ labels['login.password.label'] }}" required>
 
-				<label for="">@{{ labels['login.password.label']  }}</label>
-				<input type="text" name="login.password" ng-model="login.password" class="form-control" id="login.password" placeholder="Input field">
-			</div>
-
-			<button type="submit" name="login.sumbit" class="btn btn-primary" id="login.submit">@{{ labels['login.submit.label']  }}</button>
+			<button type="submit" class="btn btn-lg btn-primary btn-block">@{{ labels['login.submit.label']  }} <i class="fa fa-sign-in"></i></button>
 		</form>
 		@{{ login }}
 	</div>
 </div>
 
 <script src="//code.angularjs.org/1.4.7/angular.min.js"></script>
+<script src="//code.angularjs.org/1.4.7/angular-cookies.min.js"></script>
 <script src="/app.js"></script>
 @endsection
