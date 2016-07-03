@@ -29,16 +29,14 @@ class LabelTest extends TestCase
             ->assertResolvedProperly($severalExpectedLabels);
     }
 
-    private function request($aLabel)
+    private function request($labels)
     {
-        return $this->json('POST', self::ENDPOINT, $aLabel);
+        return $this->json('POST', self::ENDPOINT, $labels);
     }
 
     private function assertResolvedProperly($expectedLabel)
     {
         $this->assertResponseOk()
             ->seeJsonContains($expectedLabel);
-        
-        var_dump($this->response);
     }
 }

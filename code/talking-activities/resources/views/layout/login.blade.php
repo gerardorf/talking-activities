@@ -8,12 +8,12 @@
 		</div>
 		<form ng-submit="authenticate()" class="form-signin">
 			<h2 class="form-signin-heading">@{{ labels['login.title.label']  }}</h2>
-			<label for="email">@{{ labels['login.mail.label']  }}</label>
-			<input type="text" id="email" ng-model="login.email" class="form-control" placeholder="@{{ labels['login.mail.label'] }}" required autofocus>
-			<label for="password">@{{ labels['login.password.label']  }}</label>
-			<input type="text" id="password" ng-model="login.password" class="form-control" placeholder="@{{ labels['login.password.label'] }}" required>
+			<label for="login.mail">@{{ labels['login.mail.label']  }}</label>
+			<input type="text" id="login.mail" ng-model="login.email" class="form-control" placeholder="@{{ labels['login.mail.label'] }}" required autofocus>
+			<label for="login.password">@{{ labels['login.password.label']  }}</label>
+			<input type="text" id="login.password" ng-model="login.password" class="form-control" placeholder="@{{ labels['login.password.label'] }}" required>
 
-			<button type="submit" class="btn btn-lg btn-primary btn-block">@{{ labels['login.submit.label']  }} <i class="fa fa-sign-in"></i></button>
+			<button type="submit" id="login.submit" class="btn btn-lg btn-primary btn-block">@{{ labels['login.submit.label']  }} <i class="fa fa-sign-in"></i></button>
 		</form>
 	</div>
 </div>
