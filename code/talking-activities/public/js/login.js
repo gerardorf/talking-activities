@@ -1,11 +1,8 @@
 talking.service('authenticationService', ['$http', function($http) {
+    const ENDPOINT = '/system/authentication';
 
     var authenticate = function (credentials) {
-        return $http({
-            method: 'post',
-            url: '/system/authentication',
-            data: credentials
-        });
+        return $http.post(ENDPOINT, credentials);
     };
     
     return{
@@ -58,7 +55,7 @@ talking.factory('labelsFactory', ['labelsService', function(labelsService) {
 }]);
 
 talking.service('labelsService', ['$http', function($http) {
-    var ENDPOINT = '/system/labels';
+    const ENDPOINT = '/system/labels';
     
     var loadLabel = function (key) {
         return loadLabels([key])

@@ -1,5 +1,5 @@
 talking.service('labelsService', ['$http', function($http) {
-    var ENDPOINT = '/system/labels';
+    const ENDPOINT = '/system/labels';
     
     var loadLabel = function (key) {
         return loadLabels([key])
