@@ -1,10 +1,10 @@
 talking.service('authenticationService', ['$http', function($http) {
 
-    var authenticate = function (login) {
+    var authenticate = function (credentials) {
         return $http({
             method: 'post',
             url: '/system/authentication',
-            data: login
+            data: credentials
         });
     };
     

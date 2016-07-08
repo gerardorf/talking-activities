@@ -1,5 +1,6 @@
 talking.service('labelsService', ['$http', function($http) {
-   
+    var ENDPOINT = '/system/labels';
+    
     var loadLabel = function (key) {
         return loadLabels([key])
     };
@@ -7,20 +8,16 @@ talking.service('labelsService', ['$http', function($http) {
     var loadLabels = function(keys) {
         var labels = {};
         request(keys)
-            .success(function (response) {
-                for (var i = 0; i < response.length; i++) {
-                    labels[response[i].key] = response[i].value;
+            .then(function (response) {
+                for (var i = 0; i < response.data.length; i++) {
+                    labels[response.data[i].key] = response.data[i].value;
                 }
             });
         return labels;
     };
 
     var request = function (keys) {
-        return $http({
-            method: 'post',
-            url: '/system/labels',
-            data: {keys: keys}
-        });
+        return $http.post(ENDPOINT, {keys: keys});
     };
     
     return {

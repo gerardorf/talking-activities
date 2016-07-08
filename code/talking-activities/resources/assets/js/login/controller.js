@@ -1,4 +1,4 @@
-talking.controller('loginController', ['$scope', '$location', 'labelsFactory', 'labelsService', 'authenticationService', function ($scope, $location, labelsFactory, labelsService, authenticationService) {
+talking.controller('loginController', ['$scope', '$location', 'labelsFactory', 'authenticationService', function ($scope, $location, labelsFactory, authenticationService) {
     $scope.login = {
         email: '',
         password: ''
