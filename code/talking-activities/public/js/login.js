@@ -16,8 +16,6 @@ talking.controller('loginController', ['$scope', '$location', 'labelsFactory', '
     };
     $scope.labels = labelsFactory.page();
     $scope.error = false;
-    $scope.welcomeMessage = false;
-
 
     $scope.authenticate = function () {
         authenticationService.authenticate($scope.login)

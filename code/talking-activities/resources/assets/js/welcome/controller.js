@@ -1,13 +1,22 @@
-talking.controller('welcomeController', ['$scope', '$cookies', function ($scope, $cookies) {
-    
-    $scope.welcomeMessage = false;
+talking.controller('welcomeController', ['$scope', '$cookies', 'welcomeLabelsFactory', function ($scope, $cookies, welcomeLabelsFactory) {
+    $scope.showMessage = false;
+    $scope.labels = {};
     
     var showWelcomeMessage = function () {
-        if ($cookies.get('returningUser')===undefined){
-            $scope.welcomeMessage = true;
-            $cookies.put('returningUser', true);
+        if (isANewUser()){
+            printWelcomeMessage();
         } 
-    }
+    };
     
-   showWelcomeMessage(); 
+    showWelcomeMessage();
+    
+    function isANewUser() {
+        return $cookies.get('returningUser') === undefined;
+    }
+
+    function printWelcomeMessage() {
+        $scope.showMessage = true;
+        $scope.labels = welcomeLabelsFactory.page();
+        $cookies.put('returningUser', true);
+    }
 }]);
