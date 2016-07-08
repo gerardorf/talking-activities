@@ -8,8 +8,9 @@ talking.factory('labelsFactory', ['labelsService', function(labelsService) {
         ]);
     };
 
-    var errorLabel = function() {
-        return labelsService.loadLabel('login.password.error');
+    var errorLabel = function(errorKey) {
+        // return labelsService.loadLabel('login.password.error');
+        return labelsService.loadLabel(errorKey);
     };
 
     return {

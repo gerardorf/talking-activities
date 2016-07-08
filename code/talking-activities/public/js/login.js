@@ -12,7 +12,7 @@ talking.service('authenticationService', ['$http', function($http) {
         authenticate: authenticate
     }
 }]);
-talking.controller('loginController', ['$scope', '$cookies', '$location', 'labelsFactory', 'labelsService', 'authenticationService', function ($scope, $cookies, $location, labelsFactory, labelsService, authenticationService) {
+talking.controller('loginController', ['$scope', '$location', 'labelsFactory', 'labelsService', 'authenticationService', function ($scope, $location, labelsFactory, labelsService, authenticationService) {
     $scope.login = {
         email: '',
         password: ''
@@ -28,21 +28,12 @@ talking.controller('loginController', ['$scope', '$cookies', '$location', 'label
             .catch(showErrorMessage);
     };
 
-    var showError = function () {
-        console.log('showError');
-    };
-    
     var goToStartPage = function () {
         $location.path('/welcome');
-    }
+    };
     
     var showErrorMessage = function (response) {
-        console.log(response.data);
-        if (response.data.error) {
-            $scope.error = labelsFactory.error();
-        } else {
-            $location.path('/welcome');
-        }
+        $scope.error = labelsFactory.error(response.data.error);
     };
 }]);
 
@@ -56,8 +47,9 @@ talking.factory('labelsFactory', ['labelsService', function(labelsService) {
         ]);
     };
 
-    var errorLabel = function() {
-        return labelsService.loadLabel('login.password.error');
+    var errorLabel = function(errorKey) {
+        // return labelsService.loadLabel('login.password.error');
+        return labelsService.loadLabel(errorKey);
     };
 
     return {

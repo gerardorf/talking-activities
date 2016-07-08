@@ -19,6 +19,6 @@ talking.controller('loginController', ['$scope', '$location', 'labelsFactory', '
     };
     
     var showErrorMessage = function (response) {
-        $scope.error = labelsFactory.error();
+        $scope.error = labelsFactory.error(response.data.error);
     };
 }]);
