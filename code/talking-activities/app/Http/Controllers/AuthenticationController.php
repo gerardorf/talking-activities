@@ -11,6 +11,9 @@ class AuthenticationController extends Controller
 {
     private $authenticationService;
 
+	const STATUS_OK = 200;
+	const STATUS_UNAUTHORIZED = 401;
+
 	public function __construct(AuthenticationService $service)
 	{
         $this->authenticationService = $service;
@@ -18,14 +21,16 @@ class AuthenticationController extends Controller
 
 	public function attempt(Request $request)
 	{
+		$status = self::STATUS_OK;
 		try{
 			$credentials = new Credentials($request->email, $request->password);
 			$token = $this->authenticationService->attempt($credentials);
 			$message = MessageManager::tokenMessage($token);
 		}catch (InvalidUserException $exception){
 			$message = MessageManager::errorMessage();
+			$status = self::STATUS_UNAUTHORIZED;
 		}
-		return response()->json($message);
+		return response()->json($message, $status);
 
 	}
 }

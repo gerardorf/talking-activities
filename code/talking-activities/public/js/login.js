@@ -21,24 +21,28 @@ talking.controller('loginController', ['$scope', '$cookies', '$location', 'label
     $scope.error = false;
     $scope.welcomeMessage = false;
 
+
     $scope.authenticate = function () {
         authenticationService.authenticate($scope.login)
-            .success(function (response) {
-                console.log(response);
-                if (response.error) {
-                    $scope.error = labelsFactory.error();
-                } else{
-                    $location.path('/welcome');
-                }
-            });
-    }.bind($scope);
+            .then(goToStartPage)
+            .catch(showErrorMessage);
+    };
 
-    var merge = function (obj1,obj2){
-        var obj3 = {};
-        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
-        console.log(obj3);
-        return obj3;
+    var showError = function () {
+        console.log('showError');
+    };
+    
+    var goToStartPage = function () {
+        $location.path('/welcome');
+    }
+    
+    var showErrorMessage = function (response) {
+        console.log(response.data);
+        if (response.data.error) {
+            $scope.error = labelsFactory.error();
+        } else {
+            $location.path('/welcome');
+        }
     };
 }]);
 

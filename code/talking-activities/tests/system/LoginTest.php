@@ -6,7 +6,8 @@ use Tests\TestCase;
 class LoginTest extends TestCase
 {
     const ENDPOINT= 'system/authentication';
-    
+    const STATUS_UNAUTHORIZED = 401;
+
 
     /** @test */
 	public function it_authenticates_a_valid_user()
@@ -57,7 +58,7 @@ class LoginTest extends TestCase
     {
         $errorMessage = ['error'=> 'login.password.error'];
 
-        return $this->assertResponseOk()
+        return $this->assertResponseStatus(self::STATUS_UNAUTHORIZED)
             ->seeJsonEquals($errorMessage);
     }
 }
