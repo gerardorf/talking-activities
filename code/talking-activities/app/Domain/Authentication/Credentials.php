@@ -22,4 +22,9 @@ class Credentials
 	{
 		return $this->password;
 	}
+
+	public function id()
+	{
+		return md5($this->email().$this->password());
+	}
 }
