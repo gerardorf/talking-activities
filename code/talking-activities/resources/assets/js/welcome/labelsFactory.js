@@ -1,10 +1,15 @@
 talking.factory('welcomeLabelsFactory', ['labelsService', function(labelsService) {
-    var pageLabels = function() {
+    var pageLabel = function() {
+        return labelsService.loadLabel('welcome.title.label');
+    };
+
+    var welcomeLabel= function() {
         console.log('load welcome message');
         return labelsService.loadLabel('welcome.message.label');
     };
 
     return {
-        page: pageLabels
+        page: pageLabel,
+        welcome: welcomeLabel
     };
 }]);
