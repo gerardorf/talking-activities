@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Talking Activity</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 </head>
 <body>
     <div ng-view></div>

@@ -3,6 +3,10 @@ talking.controller('welcomeController', ['$scope', '$cookies', 'welcomeLabelsFac
     $scope.showMessage = false;
     $scope.message= {};
     
+    $scope.hideMessage = function() {
+        $scope.showMessage = false;
+    };
+    
     var showWelcomeMessage = function() {
         loadLabel();
         if (isANewUser()){

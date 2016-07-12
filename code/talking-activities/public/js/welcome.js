@@ -3,6 +3,10 @@ talking.controller('welcomeController', ['$scope', '$cookies', 'welcomeLabelsFac
     $scope.showMessage = false;
     $scope.message= {};
     
+    $scope.hideMessage = function() {
+        $scope.showMessage = false;
+    };
+    
     var showWelcomeMessage = function() {
         loadLabel();
         if (isANewUser()){
@@ -32,14 +36,18 @@ talking.factory('welcomeLabelsFactory', ['labelsService', function(labelsService
         return labelsService.loadLabel('welcome.title.label');
     };
 
-    var welcomeLabel= function() {
+    var welcomeLabels= function() {
         console.log('load welcome message');
-        return labelsService.loadLabel('welcome.message.label');
+        return labelsService.loadLabels(['welcome.message.title',
+            'welcome.message.body',
+            'welcome.message.submit'
+        ]);
+        
     };
 
     return {
         page: pageLabel,
-        welcome: welcomeLabel
+        welcome: welcomeLabels
     };
 }]);
 //# sourceMappingURL=welcome.js.map

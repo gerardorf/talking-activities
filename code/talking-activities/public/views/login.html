@@ -1,13 +1,17 @@
-<div ng-show="error['login.password.error']" class="alert alert-danger">
-    {{ error['login.password.error'] }}
-</div>
-<form ng-submit="authenticate()" class="form-signin">
-    <h2 class="form-signin-heading">{{ labels['login.title.label']  }}</h2>
-    <label for="login.mail">{{ labels['login.mail.label']  }}</label>
-    <input type="text" id="login.mail" ng-model="login.email" class="form-control" placeholder="{{ labels['login.mail.label'] }}" required autofocus>
-    <label for="login.password">{{ labels['login.password.label']  }}</label>
-    <input type="text" id="login.password" ng-model="login.password" class="form-control" placeholder="{{ labels['login.password.label'] }}" required>
+<div class="container">
+    <div ng-show="error['login.password.error']" class="alert alert-danger">
+        {{ error['login.password.error'] }}
+    </div>
+    <form ng-submit="authenticate()" class="form-signin">
+        <h2 class="form-signin-heading">{{ labels['login.title.label'] }}</h2>
+        <label for="login.mail">{{ labels['login.mail.label'] }}</label>
+        <input type="text" id="login.mail" ng-model="login.email" class="form-control"
+               placeholder="{{ labels['login.mail.label'] }}" required autofocus>
+        <label for="login.password">{{ labels['login.password.label'] }}</label>
+        <input type="text" id="login.password" ng-model="login.password" class="form-control"
+               placeholder="{{ labels['login.password.label'] }}" required>
 
-    <button type="submit" id="login.submit" class="btn btn-lg btn-primary btn-block">{{ labels['login.submit.label']  }} <i class="fa fa-sign-in"></i></button>
-</form>
+        <button type="submit" id="login.submit" class="btn btn-lg btn-primary btn-block">{{ labels['login.submit.label']
+            }} <i class="fa fa-sign-in"></i></button>
+    </form>
 </div>

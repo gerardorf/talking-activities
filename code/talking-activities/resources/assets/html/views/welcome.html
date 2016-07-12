@@ -1,7 +1,38 @@
-<div>
-    {{ labels['welcome.title.label'] }}
-</div>
-<div ng-show="showMessage">
-    {{ message['welcome.message.label'] }}
-</div>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-brand">Talking Activities</div>
+    </div>
 
+    <div class="collapse navbar-collapse" id="navbar-brand">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">User <span class="glyphicon glyphicon-log-out"></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div>
+        {{ labels['welcome.title.label'] }}
+    </div>
+    <div ng-show="showMessage">
+        <div class="bs-calltoaction bs-calltoaction-info">
+            <div class="row">
+                <div class="col-md-9 cta-contents">
+                    <h1 class="cta-title">{{ message['welcome.message.title'] }}</h1>
+                    <div class="cta-desc">
+                        <p>{{ message['welcome.message.body'] }}</p>
+                    </div>
+                </div>
+                <div class="col-md-3 cta-button">
+                    <a ng-click="hideMessage()" href="javascript:void(0);" class="btn btn-lg btn-block btn-info">{{
+                        message['welcome.message.submit'] }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
