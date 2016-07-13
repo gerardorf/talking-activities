@@ -1,4 +1,4 @@
-talking.service('labelsService', ['$http', function($http) {
+talking.service('labelsService', function($http) {
     const ENDPOINT = '/system/labels';
     
     var loadLabel = function (key) {
@@ -24,4 +24,4 @@ talking.service('labelsService', ['$http', function($http) {
         loadLabel: loadLabel,
         loadLabels: loadLabels
     }
-}]);
+});

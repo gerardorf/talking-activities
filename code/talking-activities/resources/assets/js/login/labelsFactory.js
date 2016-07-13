@@ -1,4 +1,4 @@
-talking.factory('labelsFactory', ['labelsService', function(labelsService) {
+talking.factory('labelsFactory', function(labelsService) {
     
     var pageLabels = function() {
         return labelsService.loadLabels(['login.mail.label',
@@ -16,4 +16,4 @@ talking.factory('labelsFactory', ['labelsService', function(labelsService) {
         page: pageLabels,
         error: errorLabel
     };
-}]);
+});

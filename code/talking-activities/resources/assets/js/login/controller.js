@@ -1,4 +1,4 @@
-talking.controller('loginController', ['$scope', '$location', 'labelsFactory', 'authenticationService', function ($scope, $location, labelsFactory, authenticationService) {
+talking.controller('loginController', function ($scope, $location, labelsFactory, authenticationService) {
     $scope.login = {
         email: '',
         password: ''
@@ -8,8 +8,15 @@ talking.controller('loginController', ['$scope', '$location', 'labelsFactory', '
 
     $scope.authenticate = function () {
         authenticationService.authenticate($scope.login)
+            .then(validateSession)
             .then(goToStartPage)
             .catch(showErrorMessage);
+    };
+
+    var validateSession = function(response) {
+        var token = response.data.token;
+        authenticationService.saveToken(token);
+        authenticationService.trackUser(token);
     };
 
     var goToStartPage = function () {
@@ -19,4 +26,4 @@ talking.controller('loginController', ['$scope', '$location', 'labelsFactory', '
     var showErrorMessage = function (response) {
         $scope.error = labelsFactory.error(response.data.error);
     };
-}]);
+});

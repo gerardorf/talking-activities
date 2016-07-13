@@ -1,32 +1,42 @@
-talking.controller('welcomeController', ['$scope', '$cookies', 'welcomeLabelsFactory', function ($scope, $cookies, welcomeLabelsFactory) {
-    $scope.labels = {};
-    $scope.showMessage = false;
+talking.controller('welcomeController', function ($scope, $cookies, $location, welcomeLabelsFactory) {
+    $scope.labels = welcomeLabelsFactory.page();
+    $scope.showWMessage = false;
     $scope.message= {};
     
     $scope.hideMessage = function() {
         $scope.showMessage = false;
     };
-    
-    var showWelcomeMessage = function() {
-        loadLabel();
-        if (isANewUser()){
-            printWelcomeMessage();
-        } 
+
+    $scope.logout = function() {
+        invalidateSession();
     };
     
-    showWelcomeMessage();
+    var showWelcomeMessage = function() {
+        if (isANewUser()){
+            printWelcomeMessage();
+        }
+    }();
 
-    function loadLabel() {
-        $scope.labels = welcomeLabelsFactory.page();
+    function invalidateSession() {
+        $cookies.remove('user_token');
+        redirectToLogin();
+    }
+
+    var redirectToLogin = function () {
+        $location.path('/login');
     };
 
     function isANewUser() {
-        return $cookies.get('returningUser') === undefined;
+        return $cookies.get('returning_user') === undefined;
     }
 
     function printWelcomeMessage () {
         $scope.showMessage = true;
         $scope.message= welcomeLabelsFactory.welcome();
-        $cookies.put('returningUser', true);
+        doNotShowWelcomeMessageAgain();
     }
-}]);
+
+    function doNotShowWelcomeMessageAgain() {
+        $cookies.put('returning_user', true);
+    }
+});
